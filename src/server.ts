@@ -61,12 +61,12 @@ async function main() {
                 {
                     id: 'WebStreamerMBG',
                     url: 'https://87d6a6ef6b58-webstreamrmbg-dev.baby-beamup.club/manifest.json',
-                    enabled: true
+                    enabled: false
                 },
                 {
                     id: 'Streamify',
                     url: 'https://stremify.hayd.uk/manifest.json',
-                    enabled: true
+                    enabled: false
                 }
             ]
         },

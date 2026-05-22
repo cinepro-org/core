@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "src/index.ts": {
-      "runtime": "nodejs20.x",
+      "runtime": "nodejs18.x",
       "maxDuration": 10
     }
   },

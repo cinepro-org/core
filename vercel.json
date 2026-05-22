@@ -8,7 +8,7 @@
   },
   "env": {
     "NODE_ENV": "production",
-    "API_KEY": "@api_key", 
+    "API_KEY": "@api_key",
     "DB_URL": "@db_url"
   },
   "build": {
@@ -20,11 +20,5 @@
     { "source": "/(.*)", "destination": "/src/index.ts" }
   ],
   "cleanUrls": true,
-  "trailingSlash": false,
-  "probes": [
-    {
-      "path": "/",
-      "mustContain": "Welcome"
-    }
-  ]
+  "trailingSlash": false
 }

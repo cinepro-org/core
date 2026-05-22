@@ -1,20 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "src/index.ts"
-    }
-  ],
   "functions": {
     "src/index.ts": {
       "runtime": "nodejs20.x",
@@ -22,13 +7,24 @@
     }
   },
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "API_KEY": "@api_key", 
+    "DB_URL": "@db_url"
   },
   "build": {
     "env": {
       "NODE_ENV": "production"
     }
   },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/src/index.ts" }
+  ],
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "probes": [
+    {
+      "path": "/",
+      "mustContain": "Welcome"
+    }
+  ]
 }

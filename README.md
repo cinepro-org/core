@@ -58,6 +58,16 @@ npm run dev            # http://localhost:3000
 
 For Docker, production deployment, and advanced configuration options → **[Quickstart](https://docs.cinepro.cc/quickstart)**
 
+## Fork Sync + Vercel Auto Deploy
+
+If you run this on a fork and want automatic deploys from synced upstream commits:
+
+1. Connect your **fork repository** to Vercel (not the upstream repo) and set Production Branch to `main`.
+2. In Vercel Project Settings, keep **Auto Deploy** enabled and keep **Ignored Build Step** empty.
+3. Add required environment variables in Vercel (at minimum `TMDB_API_KEY`; add any others from `.env.example` as needed).
+4. Use the workflow at `/home/runner/work/cinepro/cinepro/.github/workflows/sync-fork.yml` to sync upstream `main` into your fork `main` (manual + every 6 hours).
+5. (Optional) Set repository variable `UPSTREAM_REPOSITORY` (example: `cinepro-org/core`) if your upstream is different.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Features

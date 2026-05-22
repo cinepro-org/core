@@ -1,0 +1,46 @@
+name: Sync Fork (upstream -> fork)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-fork-main
+  cancel-in-progress: true
+
+jobs:
+  sync-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Add upstream and fetch
+        env:
+          UPSTREAM_REPOSITORY: ${{ vars.UPSTREAM_REPOSITORY || 'cinepro-org/core' }}
+        run: |
+          git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
+          git fetch upstream main
+
+      - name: Fast-forward fork main from upstream
+        run: |
+          git checkout main
+          if git merge-base --is-ancestor main upstream/main; then
+            git merge --ff-only upstream/main
+            git push origin main
+          else
+            echo "Fork main has commits not in upstream/main; refusing non-fast-forward sync."
+            exit 1
+          fi

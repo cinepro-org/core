@@ -7,17 +7,13 @@
     }
   },
   "env": {
-    "NODE_ENV": "production",
-    "API_KEY": "@api_key",
-    "DB_URL": "@db_url"
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
+    "NODE_ENV": "production"
   },
   "rewrites": [
-    { "source": "/(.*)", "destination": "/src/index.ts" }
+    {
+      "source": "/(.*)",
+      "destination": "/src/index.ts"
+    }
   ],
   "cleanUrls": true,
   "trailingSlash": false

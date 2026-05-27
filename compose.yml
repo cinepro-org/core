@@ -16,7 +16,7 @@ services:
             - redis
         restart: unless-stopped
         networks:
-            - omss-network
+            - cinepro-network
 
     redis:
         image: redis:7-alpine
@@ -26,11 +26,11 @@ services:
             - redis-data:/data
         restart: unless-stopped
         networks:
-            - omss-network
+            - cinepro-network
 
 volumes:
     redis-data:
 
 networks:
-    omss-network:
+    cinepro-network:
         driver: bridge

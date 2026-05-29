@@ -1,14 +1,27 @@
 {
     "name": "@cinepro/core",
     "version": "1.0.0",
+    "description": "OMSS-compliant streaming backend powering the CinePro ecosystem",
+    "main": "dist/server.js",
     "type": "module",
+    "engines": {
+        "node": ">=18.0.0"
+    },
     "scripts": {
         "dev": "tsx watch src/server.ts",
         "build": "tsc",
-        "start": "npm run build && node dist/server.js",
+        "start": "node dist/server.js",
         "format": "prettier --write src",
         "clean": "npx rimraf dist"
     },
+    "keywords": [
+        "cinepro",
+        "streaming",
+        "omss",
+        "movies"
+    ],
+    "author": "aashumalik784",
+    "license": "POLYFORM",
     "dependencies": {
         "@omss/framework": "^1.1.19",
         "cheerio": "^1.2.0",

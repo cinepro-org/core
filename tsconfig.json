@@ -3,7 +3,7 @@
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "target": "ES2022",
-        "lib": ["ES2022"],
+        "lib": ["ES2020", "WebWorker"],
         "outDir": "./dist",
         "rootDir": "./src",
         "strict": true,

@@ -1,0 +1,31 @@
+name: cinepro_manager
+description: windows manager for installing and running cinepro core.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  archive: ^4.0.9
+  crypto: ^3.0.7
+  cryptography: ^2.7.0
+  ffi: ^2.1.3
+  file_selector: ^1.0.3
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  path: ^1.9.0
+  tray_manager: ^0.5.2
+  win32: ^5.9.0
+  window_manager: ^0.5.1
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/cinepro-logo.png

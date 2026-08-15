@@ -1,4 +1,4 @@
-import { ExtractedStream } from './tulnex.types.js';
+import type { ExtractedStream } from './tulnex.types.ts';
 
 export function extractUrl(data: any): ExtractedStream | null {
     if (!data) return null;

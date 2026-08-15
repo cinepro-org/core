@@ -1,5 +1,5 @@
 import { createHash, createDecipheriv } from 'crypto';
-import type { ApiResponse } from './streammafia.types.js';
+import type { ApiResponse } from './streammafia.types.ts';
 
 function base64ToBuffer(b64: string): Buffer {
     return Buffer.from(b64, 'base64');

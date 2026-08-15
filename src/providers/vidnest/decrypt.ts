@@ -1,4 +1,4 @@
-import { klikxxiResponse } from './vidnest.types.js';
+import type { klikxxiResponse } from './vidnest.types.ts';
 
 /**
  * Custom alphabet taken from VidNest frontend logic.

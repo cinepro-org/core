@@ -5,12 +5,12 @@ import type {
     ProviderResult,
     Source
 } from '@omss/framework';
-import { decrypt } from './decrypt.js';
+import { decrypt } from './decrypt.ts';
 import type {
     ApiResponse,
     StreamUrl,
     Track as ApiTrack
-} from './fmovies4u.types.js';
+} from './fmovies4u.types.ts';
 
 export class Fmovies4U extends BaseProvider {
     readonly id = 'fmovies4u';

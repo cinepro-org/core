@@ -10,9 +10,9 @@ import type {
     PeachifyParsedSubtitle,
     PeachifyRawSource,
     PeachifyRawSubtitle
-} from './peachify.types.js';
-import decrypt from './decrypt.js';
-import { generateRandomUserAgent } from '../../utils/ua.js';
+} from './peachify.types.ts';
+import decrypt from './decrypt.ts';
+import { generateRandomUserAgent } from '../../utils/ua.ts';
 
 export class PeachifyProvider extends BaseProvider {
     readonly id = 'Peachify';

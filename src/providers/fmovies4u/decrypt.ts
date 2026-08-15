@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import type { ApiResponse } from './fmovies4u.types.js';
+import type { ApiResponse } from './fmovies4u.types.ts';
 
 export function decrypt(encryptedText: string): ApiResponse {
     try {

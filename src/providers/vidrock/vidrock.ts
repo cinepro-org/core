@@ -6,8 +6,8 @@ import type {
     Source,
     Subtitle
 } from '@omss/framework';
-import { encryptItemId } from './encrypt.js';
-import { VidrockStreams, VidrockCDN } from './vidrock.types.js';
+import { encryptItemId } from './encrypt.ts';
+import type { VidrockStreams, VidrockCDN } from './vidrock.types.ts';
 
 const PROXY_PREFIX = 'https://proxy.vidrock.store/';
 

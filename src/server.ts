@@ -1,9 +1,11 @@
-import { OMSSServer } from '@omss/framework';
+import { OMSSConfig, OMSSServer } from '@omss/framework';
 import 'dotenv/config';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import fastifyStatic from '@fastify/static';
 import { knownThirdPartyProxies } from './thirdPartyProxies.js';
 import { streamPatterns } from './streamPatterns.js';
+import { buildProviders } from './nuvio-compat/nuvioBuilder.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,7 +79,32 @@ async function main() {
 
     // Register providers
     const registry = server.getRegistry();
-    await registry.discoverProviders(path.join(__dirname, './providers/'));
+    const providersDir = path.join(__dirname, './providers/');
+    await registry.discoverProviders(providersDir);
+
+    // Nuvio static providers support
+    if (process.env.NUVIO_ENABLED === 'true') {
+        const nuvioOutputDir = path.join(__dirname, '..', 'dist', 'nuvio-providers')
+        console.log('Building static Nuvio providers...')
+        const config: OMSSConfig = (server as any).config
+        await buildProviders(providersDir, nuvioOutputDir, {
+          name: config.name,
+          version: config.version,
+          description: (config as any).description || '',
+        }, registry.getProviders())
+
+        const fastifyInstance = server.getInstance()
+        fastifyInstance.register(fastifyStatic, {
+          root: nuvioOutputDir,
+          prefix: '/nuvio/',
+        })
+        console.log([
+          'GET /nuvio/manifest.json               - Manifest for Nuvio providers',
+          'GET /nuvio/providers/:provider.js      - Nuvio provider script',
+          'GET /nuvio/min/manifest.json           - Manifest for minified Nuvio providers',
+          'GET /nuvio/min/providers/:provider.js  - Minified Nuvio provider script',
+        ]);
+    }
 
     await server.start();
 
@@ -114,6 +141,7 @@ ${borderBottom}
 `);
 }
 
-main().catch(() => {
+main().catch((err) => {
+    console.error(err)
     process.exit(1);
 });

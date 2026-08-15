@@ -28,9 +28,10 @@ interface NuvioStreamSubtitle {
 }
 
 interface NuvioStreamAudioTrack {
-  language: string;
-  label: string;
-  url: string;
+  name: string
+  url: string
+  language?: string
+  headers?: object
 }
 
 interface NuvioStreamResult {
@@ -84,7 +85,10 @@ if (typeof globalThis !== 'undefined' && (globalThis as any).TMDB_API_KEY) {
 const tmdbService = new TMDBService(tmdbApiKey, new NullCacheService())
 const instance: BaseProvider = new __CLASS_NAME__()
 
-function unproxySource(source: Source): any {
+function unproxySource(source: any): any {
+  if (!source || !source.url) {
+    return null;
+  }
   let url = new URL(source.url)
   let headers = {
     ...(source as any).headers,
@@ -104,6 +108,10 @@ function unproxySource(source: Source): any {
   }
 }
 async function getStreams(tmdbId: string, mediaType: string, season: string, episode: string) {
+  if (mediaType !== 'movie' && !season && !episode) {
+    console.error(`Received a ${mediaType} without a season (${season}) and episode (${episode})`);
+    return [];
+  }
   // Get the full source info from the TMDB service.
   const source = await tmdbService.getMediaObject(mediaType, tmdbId, parseInt(String(season), 10), parseInt(String(episode), 10))
   let results
@@ -123,19 +131,30 @@ async function getStreams(tmdbId: string, mediaType: string, season: string, epi
         name: subtitle.label,
         headers: (subtitle as any).headers,
       }
-    })
+    });
+    // Log diagnostics if any.
+    result.diagnostics.forEach(diagnostic => {
+      let logFunction = (console as any)[diagnostic.severity];
+      if (typeof logFunction !== 'function') {
+        logFunction = console.log.bind(console, `{${diagnostic.severity}}`);
+      }
+      logFunction(`[${instance.name}]: [${diagnostic.code}] ${diagnostic.message}`)
+    });
     return result.sources
       .map(unproxySource)
       .map((source: Source): NuvioStreamResult => {
+        // Pick up audio tracks on the source or provider result level.
+        const audioTracks = (source.audioTracks || (result as any).audioTracks || []).map(unproxySource).filter(Boolean);
+
         return {
-          title: `${instance.name} - ${source.quality}`,
+          title: `${instance.name} - ${(source as any).title || source.quality}`,
           url: source.url,
           type: source.type,
           quality: source.quality,
           headers: (source as any).headers,
           provider: source.provider?.name,
           subtitles,
-          audioTracks: (source.audioTracks as any),
+          audioTracks,
         }
       })
   })

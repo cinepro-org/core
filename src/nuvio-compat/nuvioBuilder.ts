@@ -2,8 +2,9 @@ import * as fs from 'fs/promises'
 import * as path from 'path'
 import { BaseProvider } from '@omss/framework';
 import { fileURLToPath } from 'url'
-import esbuild, { BuildOptions } from 'esbuild'
-import {quickJsModuleExportCompatPlugin, removeBlankImportsPlugin} from './esbuildPlugins.js'
+import esbuild from 'esbuild'
+import type { BuildOptions } from 'esbuild';
+import {quickJsModuleExportCompatPlugin, removeBlankImportsPlugin} from './esbuildPlugins.ts'
 // @ts-ignore
 import browserifyBuiltins from 'browserify/lib/builtins.js'
 

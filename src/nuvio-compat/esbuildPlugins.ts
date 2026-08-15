@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import browserify from 'browserify';
 import { Readable } from 'stream';
-import { Plugin, PluginBuild } from 'esbuild';
+import type { Plugin, PluginBuild } from 'esbuild';
 
 /**
  * esbuild plugin that runs Browserify over emitted JS chunks

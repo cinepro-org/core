@@ -4,8 +4,8 @@ import type {
     ProviderMediaObject,
     ProviderResult
 } from '@omss/framework';
-import type { VideasyServer } from './videasy.types.js';
-import { decryptResponse } from './decryptor.js';
+import type { VideasyServer } from './videasy.types.ts';
+import { decryptResponse } from './decryptor.ts';
 
 /**
  * all known api endpoints. mb-flix is the primary english source.

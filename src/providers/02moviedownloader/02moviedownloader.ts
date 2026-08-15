@@ -8,12 +8,12 @@ import type {
     SubtitleFormat
 } from '@omss/framework';
 import { BaseProvider, type SourceType, type Subtitle } from '@omss/framework';
-import {
+import type {
     EncryptedResponse,
     MovieDownloaderResponse,
     Token
-} from './02moviedownloader.types.js';
-import { generateRandomUserAgent } from '../../utils/ua.js';
+} from './02moviedownloader.types.ts';
+import { generateRandomUserAgent } from '../../utils/ua.ts';
 
 export class MovieDownloader extends BaseProvider {
     readonly id = '02moviedownloader';

@@ -5,8 +5,8 @@ import type {
     ProviderResult,
     Source
 } from '@omss/framework';
-import type { StreamResponse } from './vidzee.types.js';
-import { decrypt, deriveKey } from './decrypt.js';
+import type { StreamResponse } from './vidzee.types.ts';
+import { decrypt, deriveKey } from './decrypt.ts';
 
 export class VidZeeProvider extends BaseProvider {
     readonly id = 'vidzee';

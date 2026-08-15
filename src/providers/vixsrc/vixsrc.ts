@@ -6,7 +6,7 @@ import type {
     Source,
     Subtitle
 } from '@omss/framework';
-import { VixSrcApiResponse } from './vixsrc.types.js';
+import type { VixSrcApiResponse } from './vixsrc.types.ts';
 
 export class VixSrcProvider extends BaseProvider {
     readonly id = 'vixsrc';
@@ -300,7 +300,7 @@ export class VixSrcProvider extends BaseProvider {
     private parseSubtitles(content: string, pageUrl: string): Subtitle[] {
         const subtitles: Subtitle[] = [];
 
-        /* Doesn't work.. 
+        /* Doesn't work..
         // TODO: Fix subtitles for vixsrc
         const lines = content.split('\n');
 

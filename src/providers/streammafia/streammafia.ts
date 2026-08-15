@@ -9,9 +9,9 @@ import type {
     SourceType
 } from '@omss/framework';
 import { BaseProvider } from '@omss/framework';
-import { ApiResponse, EncryptedPayload, Switch } from './streammafia.types.js';
-import { decryptStreamMafia } from './decrypt.js';
-import { generateRandomUserAgent } from '../../utils/ua.js';
+import type { ApiResponse, EncryptedPayload, Switch } from './streammafia.types.ts';
+import { decryptStreamMafia } from './decrypt.ts';
+import { generateRandomUserAgent } from '../../utils/ua.ts';
 
 export class StreamMafiaProvider extends BaseProvider {
     readonly id = 'streammafia';

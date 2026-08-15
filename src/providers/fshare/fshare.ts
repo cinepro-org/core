@@ -5,7 +5,7 @@ import type {
     ProviderResult,
     SourceType
 } from '@omss/framework';
-import type { FshareResponse, FshareSource } from './fshare.types.js';
+import type { FshareResponse, FshareSource } from './fshare.types.ts';
 
 export class FsharetvProvider extends BaseProvider {
     readonly id = 'fsharetv';

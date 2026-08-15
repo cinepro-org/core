@@ -11,6 +11,7 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
+        "allowImportingTsExtensions": true,
         "declaration": true,
         "sourceMap": true,
         "noEmit": false

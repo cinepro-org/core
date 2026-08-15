@@ -7,8 +7,8 @@ import type {
     SourceType,
     Subtitle
 } from '@omss/framework';
-import { generateRandomUserAgent } from '../../utils/ua.js';
-import { VidApiResponse } from './vidapi.types.js';
+import { generateRandomUserAgent } from '../../utils/ua.ts';
+import type { VidApiResponse } from './vidapi.types.ts';
 
 export class VidApiProvider extends BaseProvider {
     readonly id = 'vidapi';

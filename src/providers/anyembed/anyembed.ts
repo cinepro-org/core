@@ -9,8 +9,8 @@ import type {
     Subtitle
 } from '@omss/framework';
 import { BaseProvider } from '@omss/framework';
-import { generateRandomUserAgent } from '../../utils/ua.js';
-import { AnyEmbedApiResponse, TokenResponse } from './anyembed.types.js';
+import { generateRandomUserAgent } from '../../utils/ua.ts';
+import type { AnyEmbedApiResponse, TokenResponse } from './anyembed.types.ts';
 
 // anyembed is still up and coming.
 // their api is unstable and their sources return 403's and

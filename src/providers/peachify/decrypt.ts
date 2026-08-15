@@ -1,5 +1,5 @@
 import { webcrypto } from 'crypto';
-import type { PeachifyApiResponse } from './peachify.types.js';
+import type { PeachifyApiResponse } from './peachify.types.ts';
 
 const { subtle } = webcrypto;
 
@@ -90,6 +90,16 @@ export default async function decryptPayload(
     payload: string
 ): Promise<PeachifyApiResponse | null> {
     try {
+        if (process.env.NUVIO_ENV) {
+          // Nuvio does not support certain features, so handle it this way.
+          const result = await fetch('https://enc-dec.app/api/dec-peachify', {
+            method: 'POST',
+            body: JSON.stringify({
+              text: payload,
+            }),
+          });
+          return (await result.json() as any).result;
+        }
         const { iv, ciphertext, authTag } = parsePayload(payload);
 
         // AES-GCM expects ciphertext + auth tag concatenated.
